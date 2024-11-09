@@ -1,0 +1,20 @@
+<Configuration>
+    <Appenders>
+        <RollingFile name="RollingFileLogger" fileName="logs/automation.log"
+                     filePattern="logs/automation-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="RollingFileLogger"/>
+        </Root>
+        <Logger name="org.openqa.selenium" level="info" additivity="false">
+            <AppenderRef ref="RollingFileLogger"/>
+        </Logger>
+    </Loggers>
+</Configuration>
